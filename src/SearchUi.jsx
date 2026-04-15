@@ -48,8 +48,8 @@ const SearchUi = () => {
         }}
       />
 
-      <ul>
-        {products.map((item, index) => (
+      <ul style={{ display: 'flex' }}>
+        {products.map((item) => (
           <div
             key={item.id}
             className="card"
