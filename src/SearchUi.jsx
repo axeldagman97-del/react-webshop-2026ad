@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import React from 'react';
+import ProductCard from './ProductCard';
 
 const SearchUi = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -21,6 +22,7 @@ const SearchUi = () => {
         }
 
         const data = await req.json();
+        console.log('Hela API-svaret', data.products);
 
         setProducts(data.products);
       } catch (error) {
@@ -33,35 +35,32 @@ const SearchUi = () => {
       clearTimeout(timer);
       setFetched(false);
     };
-  }, [searchTerm]);
+  }, [searchTerm, fetched]);
 
   return (
     <div>
-      <h2> Smart sök</h2>
       <input
         type="text"
-        placeholder="skriv för att söka"
+        placeholder="Sök produkt"
         value={searchTerm}
+        className="p-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all"
         onChange={(e) => {
           setSearchTerm(e.target.value);
           setFetched(true);
         }}
       />
 
-      <ul style={{ display: 'flex' }}>
+      <div
+        style={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          gap: '20px',
+          marginTop: '20px',
+        }}>
         {products.map((item) => (
-          <div
-            key={item.id}
-            className="card"
-            style={{ width: '18rem', border: '5px' }}>
-            <img class="card-img-top" src="..." alt="Card image cap" />
-            <div className="card-body">
-              <h5 className="card-title">{item.title}</h5>
-              <p className="card-text">{item.title}</p>
-            </div>
-          </div>
+          <ProductCard key={item.id} product={item} /> //produkter renderas i PrductCard komponenten
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
