@@ -3,7 +3,9 @@
 @theme {
   --font-display: 'Satoshi', 'sans-serif';
   --breakpoint-3xl: 120rem;
-  --bg-color: rgb(0, 153, 153)
-  --text-white: rgb(255, 255, 255)
-  
+
+  /* Genom att använda prefixet --color- skapar Tailwind automatiskt klasser */
+  --color-h1: rgb(0, 153, 153);
+  --color-mint-500: oklch(0.72 0.11 178);
+  --color-text-white: rgb(255, 255, 255);
 }
