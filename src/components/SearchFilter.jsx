@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import React from 'react';
 import ProductCard from './ProductCard';
 
-const SearchUi = () => {
+const SearchFilter = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [products, setProducts] = useState([]);
   const [fetched, setFetched] = useState(false);
@@ -65,7 +65,7 @@ const SearchUi = () => {
   );
 };
 
-export default SearchUi;
+export default SearchFilter;
 
 /*function SrcComponent() {
   useEffect(() => {
