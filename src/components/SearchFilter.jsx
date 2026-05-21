@@ -28,7 +28,7 @@ const SearchFilter = () => {
       } catch (error) {
         console.log('något gick fel', error);
       }
-    }, 3000);
+    }, 2000);
 
     //2 Cleanup
     return () => {

@@ -9,3 +9,5 @@
   --color-mint-500: oklch(0.72 0.11 178);
   --color-text-white: rgb(255, 255, 255);
 }
+
+@custom-variant dark (&:where(.dark, .dark *));

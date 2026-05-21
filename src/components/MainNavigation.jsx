@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import { useCart } from '../context/CartContext';
+
 /**
  * En intern funktionell-komponent för att slippa upprepa Tailwind-klasser.
  * Den tar emot 'to' (destination) och 'children' (texten i länken).
@@ -19,6 +21,7 @@ const NavLink = ({ to, children }) => (
 );
 
 function MainNavigation() {
+  const { cart } = useCart();
   return (
     /* Bakgrunden och textfärgen för hela navigationsfältet */
 
@@ -31,7 +34,7 @@ function MainNavigation() {
         <div className="flex gap-8">
           <NavLink to="/">Hem</NavLink>
           <NavLink to="/about">Contact</NavLink>
-          <NavLink to="/cart">Kundvagn</NavLink>
+          <NavLink to="/cart">Kundvagn({cart.length})</NavLink>
         </div>
       </nav>
     </div>
