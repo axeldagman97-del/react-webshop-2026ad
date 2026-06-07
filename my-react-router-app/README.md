@@ -1,87 +1,35 @@
-# Welcome to React Router!
+# Dagmans Webbshop - React-projekt
 
-A modern, production-ready template for building full-stack React applications using React Router.
+Detta är en modern e-handel byggd i React med funktioner som dynamisk produktkatalog, kategorifiltrering, varukorgshantering via Context API samt en optimerad sökfunktion med debounce-logik.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/remix-run/react-router-templates/tree/main/default)
+## Installation och uppstart
 
-## Features
+Följ dessa steg för att installera och köra igång projektet lokalt på din dator:
 
-- 🚀 Server-side rendering
-- ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling and optimization
-- 🔄 Data loading and mutations
-- 🔒 TypeScript by default
-- 🎉 TailwindCSS for styling
-- 📖 [React Router docs](https://reactrouter.com/)
+1. **Klona repot:**
 
-## Getting Started
+   ```bash
+   git clone <KLISTRA_IN_LÄNKEN_TILL_DITT_GITHUB_REPO_HÄR>
+   ```
 
-### Installation
+2. cd <NAMNET_PÅ_DIN_PROJEKTMAPP>
 
-Install the dependencies:
+3. npm install
 
-```bash
-npm install
-```
+4. npm run dev
 
-### Development
+namn på repot: react-webshop-2026ad
 
-Start the development server with HMR:
+1. Debounce
+   För att minimera antalet onödiga API-anrop till vår databas har sökkomponenten SearchFilter.jsx utrustats med en Debounce-funktion.
 
-```bash
-npm run dev
-```
+När användaren skriver i sökrutan triggas en timer (setTimeout) på en fördröjning. Om användaren fortsätter skriva inom den angivna tidsramen, rensas den gamla timern bort med en cleanup-funktion (clearTimeout) inuti en useEffect.
 
-Your application will be available at `http://localhost:5173`.
+API-anropet skickas iväg först när användaren har slutat skriva och gjort en naturlig paus. Detta sparar enormt mycket serverresurser.
 
-## Building for Production
+2. Felhantering med try...catch
+   För att säkerställa en stabil och driftsäker användarupplevelse görs alla asynkrona nätverksanrop (fetch) inuti ett try...catch-block.
 
-Create a production build:
+Try: Vi försöker hämta data från vårt API och kontrollerar om svaret är godkänt (req.ok). Om svaret är korrekt omvandlas datan till JSON och sparas i komponentens state.
 
-```bash
-npm run build
-```
-
-## Deployment
-
-### Docker Deployment
-
-To build and run using Docker:
-
-```bash
-docker build -t my-app .
-
-# Run the container
-docker run -p 3000:3000 my-app
-```
-
-The containerized application can be deployed to any platform that supports Docker, including:
-
-- AWS ECS
-- Google Cloud Run
-- Azure Container Apps
-- Digital Ocean App Platform
-- Fly.io
-- Railway
-
-### DIY Deployment
-
-If you're familiar with deploying Node applications, the built-in app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
-
-```
-├── package.json
-├── package-lock.json (or pnpm-lock.yaml, or bun.lockb)
-├── build/
-│   ├── client/    # Static assets
-│   └── server/    # Server-side code
-```
-
-## Styling
-
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
-
----
-
-Built with ❤️ using React Router.
+Catch: Om nätverket skulle ligga nere, eller om API:et returnerar ett fel, fångas felet upp i catch-blocket. Istället för att hela applikationen kraschar med en vit skärm, loggas felet säkert i konsolen, och appen kan visa ett användarvänligt felmeddelande eller behålla sitt stabila tillstånd.
