@@ -6,7 +6,7 @@ const ProductContext = createContext();
 export function ProductProvider({ children }) {
   const productData = useProducts();
 
-  console.log('hela Api-datan', productData);
+  console.log('helaApi-datan', productData);
 
   return (
     <ProductContext.Provider value={productData}>
@@ -15,7 +15,9 @@ export function ProductProvider({ children }) {
   );
 }
 
-export const useProductsList = () => {
+export const useProductList = () => {
   const context = useContext(ProductContext);
   return context;
 };
+
+//komponenten håller hela contexten för hela api:et

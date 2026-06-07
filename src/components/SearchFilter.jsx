@@ -1,16 +1,18 @@
+/* SearchFilter med Debounce*/
+
 import { useState, useEffect } from 'react';
 import React from 'react';
 import ProductCard from './ProductCard';
 
 const SearchFilter = () => {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [products, setProducts] = useState([]);
-  const [fetched, setFetched] = useState(false);
+  const [searchTerm, setSearchTerm] = useState(''); // state för sökrutan
+  const [products, setProducts] = useState([]); //State för produkterna i API:et
+  const [fetched, setFetched] = useState(false); // På och Av för fetch, kontrollerar när hämtningen får börja.
 
   useEffect(() => {
-    if (!fetched) return;
+    if (!fetched) return; //Stoppar onödig fetch
 
-    //1. starta timern Debounce
+    //1. startar timern Debounce
     const timer = setTimeout(async () => {
       try {
         const req = await fetch(
@@ -45,8 +47,8 @@ const SearchFilter = () => {
         value={searchTerm}
         className="p-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all"
         onChange={(e) => {
-          setSearchTerm(e.target.value);
-          setFetched(true);
+          setSearchTerm(e.target.value); // onChange Triggas när det skrivs i sökrutan
+          setFetched(true); // slår på UseEffecten för setFetch
         }}
       />
 
@@ -66,13 +68,3 @@ const SearchFilter = () => {
 };
 
 export default SearchFilter;
-
-/*function SrcComponent() {
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      console.log('api sökning på', searchTerm);
-    }, 500);
-  });
-}
-
-export default srcComponent; */

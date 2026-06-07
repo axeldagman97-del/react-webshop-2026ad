@@ -1,7 +1,6 @@
 //Alis search
 
 import { useState, useEffect } from 'react';
-
 import { useDebounce } from './useDebounce';
 
 export default function SearchComponent() {
