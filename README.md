@@ -1,16 +1,35 @@
-# React + Vite
+# Dagmans Webbshop - React-projekt
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Detta är en modern e-handel byggd i React med funktioner som dynamisk produktkatalog, kategorifiltrering, varukorgshantering via Context API samt en optimerad sökfunktion med debounce-logik.
 
-Currently, two official plugins are available:
+## Installation och uppstart
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Följ dessa steg för att installera och köra igång projektet lokalt på din dator:
 
-## React Compiler
+1. **Klona repot:**
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+   ```bash
+   git clone <KLISTRA_IN_LÄNKEN_TILL_DITT_GITHUB_REPO_HÄR>
+   ```
 
-## Expanding the ESLint configuration
+2. cd <NAMNET_PÅ_DIN_PROJEKTMAPP>
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+3. npm install
+
+4. npm run dev
+
+namn på repot: react-webshop-2026ad
+
+1. Debounce
+   För att minimera antalet onödiga API-anrop till vår databas har sökkomponenten SearchFilter.jsx utrustats med en Debounce-funktion.
+
+När användaren skriver i sökrutan triggas en timer (setTimeout) på en fördröjning. Om användaren fortsätter skriva inom den angivna tidsramen, rensas den gamla timern bort med en cleanup-funktion (clearTimeout) inuti en useEffect.
+
+API-anropet skickas iväg först när användaren har slutat skriva och gjort en naturlig paus. Detta sparar enormt mycket serverresurser.
+
+2. Felhantering med try...catch
+   För att säkerställa en stabil och driftsäker användarupplevelse görs alla asynkrona nätverksanrop (fetch) inuti ett try...catch-block.
+
+Try: Vi försöker hämta data från vårt API och kontrollerar om svaret är godkänt (req.ok). Om svaret är korrekt omvandlas datan till JSON och sparas i komponentens state.
+
+Catch: Om nätverket skulle ligga nere, eller om API:et returnerar ett fel, fångas felet upp i catch-blocket. Istället för att hela applikationen kraschar med en vit skärm, loggas felet säkert i konsolen, och appen kan visa ett användarvänligt felmeddelande eller behålla sitt stabila tillstånd.git
