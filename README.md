@@ -36,5 +36,7 @@ Följ dessa steg för att köra projektet lokalt på din dator:
 1. **Klona repot:**
    ```bash
    git clone https://github.com/axeldagman/react-webshop-2026ad.git
+
+   installera dependencies om med: npm install
             
    
